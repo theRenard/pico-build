@@ -56,9 +56,6 @@ const activate = 'tell application "PICO-8" to activate';
 const loadCart = cart =>
   `tell application "System Events"
 key code 53
-"load ${cart}"
-key code 36
-delay .1
 key code 15 using control down
 end tell`;
 

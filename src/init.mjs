@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import inquirer from 'inquirer';
 import json2toml from 'json2toml';
-import mkdirp from 'mkdirp';
+import { sync } from 'mkdirp';
 import chalk from 'chalk';
 import _ from 'lodash';
 import P8Cart from './p8-cart.mjs';
@@ -72,7 +72,7 @@ export default async function init() {
   cart.setTab(0, code, 'init')
 
   fs.writeFileSync('pico.toml', json2toml(picoConfig))
-  mkdirp.sync('src')
+  sync('src')
   fs.writeFileSync('src/0.init.lua', cart.tabs[0].code)
   fs.writeFileSync(picoConfig.cart, cart.toCartSource())
   console.log(`${chalk.bold.green('Done!')} Run ${chalk.yellow('pico-build build --watch')} to get started.`)

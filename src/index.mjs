@@ -1,7 +1,8 @@
-#!/usr/bin/env node --experimental-modules --no-warnings
+#!/usr/bin/env node
 
 import chalk from 'chalk';
 import yargs from 'yargs';
+import {hideBin} from "yargs/helpers";
 
 import watch from './watch.mjs';
 import build from './build.mjs';
@@ -12,7 +13,7 @@ import Config from './config.mjs';
 // process.stdin.setEncoding('ascii');
 // process.stdin.on('data', chunk => console.log(chunk));
 
-const argv = yargs
+const argv = yargs(hideBin(process.argv))
   .usage('Usage: $0 <command> [options]')
   .command(
     'build',

@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import mkdirp from 'mkdirp';
+import { sync } from 'mkdirp';
 import Jimp from 'jimp';
 import _ from 'lodash';
 
@@ -26,14 +26,14 @@ export default async function extract(config) {
     stats.luaFiles = [];
 
     if (!fs.existsSync(config.sourceDir)) {
-      mkdirp.sync(config.sourceDir)
+      sync(config.sourceDir)
     }
 
     cart.tabs.forEach((tab, index) => {
       let name = tab.title ?
         `${index}.${_.kebabCase(tab.title)}.lua` :
         `${index}.lua`;
-      
+
       let filePath = path.join(config.sourceDir, name)
       fs.writeFileSync(filePath, tab.code)
 
